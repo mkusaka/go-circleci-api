@@ -7,6 +7,14 @@ package cmd
 import (
 	"os"
 
+	"github.com/mkusaka/go-circleci-api/cmd/context"
+	"github.com/mkusaka/go-circleci-api/cmd/insights"
+	"github.com/mkusaka/go-circleci-api/cmd/job"
+	"github.com/mkusaka/go-circleci-api/cmd/pipeline"
+	"github.com/mkusaka/go-circleci-api/cmd/project"
+	"github.com/mkusaka/go-circleci-api/cmd/schedule"
+	"github.com/mkusaka/go-circleci-api/cmd/user"
+	"github.com/mkusaka/go-circleci-api/cmd/workflow"
 	"github.com/spf13/cobra"
 )
 
@@ -35,6 +43,14 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.AddCommand(context.Cmd)
+	rootCmd.AddCommand(insights.Cmd)
+	rootCmd.AddCommand(job.Cmd)
+	rootCmd.AddCommand(pipeline.Cmd)
+	rootCmd.AddCommand(project.Cmd)
+	rootCmd.AddCommand(schedule.Cmd)
+	rootCmd.AddCommand(user.Cmd)
+	rootCmd.AddCommand(workflow.Cmd)
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
