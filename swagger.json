@@ -194,40 +194,24 @@
                     "description": "The user defined name of the context."
                   },
                   "owner": {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "format": "uuid",
-                            "description": "The unique ID of the owner of the context. Specify either this or slug."
-                          },
-                          "type": {
-                            "enum": ["account", "organization"],
-                            "type": "string",
-                            "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-                            "example": "organization"
-                          }
-                        },
-                        "required": ["id"]
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The unique ID of the owner of the context. Specify either this or slug."
                       },
-                      {
-                        "type": "object",
-                        "properties": {
-                          "slug": {
-                            "type": "string",
-                            "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts."
-                          },
-                          "type": {
-                            "enum": ["organization"],
-                            "type": "string",
-                            "description": "The type of owner. Defaults to \"organization\". Accounts are only used as context owners in server and must be specified by an id instead of a slug."
-                          }
-                        },
-                        "required": ["slug"]
+                      "slug": {
+                        "type": "string",
+                        "description": "A string that represents an organization. Specify either this or id. Cannot be used for accounts."
+                      },
+                      "type": {
+                        "enum": ["account", "organization"],
+                        "type": "string",
+                        "description": "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
+                        "example": "organization"
                       }
-                    ]
+                    }
                   }
                 },
                 "required": ["name", "owner"]
@@ -448,42 +432,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "variable": {
-                          "type": "string",
-                          "description": "The name of the environment variable",
-                          "example": "POSTGRES_USER"
-                        },
-                        "created_at": {
-                          "type": "string",
-                          "format": "date-time",
-                          "description": "The date and time the environment variable was created.",
-                          "example": "2015-09-21T17:29:21.042Z"
-                        },
-                        "context_id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "description": "ID of the context (UUID)"
-                        }
-                      },
-                      "required": ["variable", "created_at", "context_id"]
+                  "type": "object",
+                  "properties": {
+                    "variable": {
+                      "type": "string",
+                      "description": "The name of the environment variable",
+                      "example": "POSTGRES_USER"
                     },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "description": "A human-readable message"
-                        }
-                      },
-                      "required": ["message"],
-                      "description": "message response",
-                      "title": "MessageResponse"
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date and time the environment variable was created.",
+                      "example": "2015-09-21T17:29:21.042Z"
+                    },
+                    "context_id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "ID of the context (UUID)"
                     }
-                  ]
+                  },
+                  "required": ["variable", "created_at", "context_id"]
                 }
               }
             }
@@ -1798,17 +1766,9 @@
                         "type": "object",
                         "properties": {
                           "time-wasted": {
-                            "allOf": [
-                              {
-                                "type": "integer",
-                                "format": "int64"
-                              },
-                              {
-                                "type": "integer",
-                                "format": "int64",
-                                "minimum": 0
-                              }
-                            ]
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 0
                           },
                           "workflow-created-at": {
                             "description": "The date and time when workflow was created."
@@ -1822,17 +1782,9 @@
                             "description": "The class the test belongs to."
                           },
                           "pipeline-number": {
-                            "allOf": [
-                              {
-                                "type": "integer",
-                                "format": "int64"
-                              },
-                              {
-                                "type": "integer",
-                                "format": "int64",
-                                "minimum": 0
-                              }
-                            ],
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 0,
                             "description": "The number of the pipeline."
                           },
                           "workflow-name": {
@@ -1848,17 +1800,9 @@
                             "description": "The name of the job."
                           },
                           "job-number": {
-                            "allOf": [
-                              {
-                                "type": "integer",
-                                "format": "int64"
-                              },
-                              {
-                                "type": "integer",
-                                "format": "int64",
-                                "minimum": 0
-                              }
-                            ],
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 0,
                             "description": "The number of the job."
                           },
                           "times-flaked": {
@@ -3567,21 +3511,7 @@
                           "trigger_parameters": {
                             "type": "object",
                             "additionalProperties": {
-                              "anyOf": [
-                                {
-                                  "type": "integer",
-                                  "format": "int64"
-                                },
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "boolean"
-                                },
-                                {
-                                  "type": "object"
-                                }
-                              ]
+                              "type": "string"
                             }
                           },
                           "state": {
@@ -3844,17 +3774,7 @@
                   "parameters": {
                     "type": "object",
                     "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
+                      "type": "string"
                     },
                     "description": "An object containing pipeline parameters and their values.",
                     "example": {
@@ -3941,21 +3861,7 @@
                     "trigger_parameters": {
                       "type": "object",
                       "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          },
-                          {
-                            "type": "object"
-                          }
-                        ]
+                        "type": "string"
                       }
                     },
                     "state": {
@@ -5567,17 +5473,7 @@
                   "parameters": {
                     "type": "object",
                     "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
+                      "type": "string"
                     },
                     "description": "An object containing pipeline parameters and their values.",
                     "example": {
@@ -5670,21 +5566,7 @@
                           "trigger_parameters": {
                             "type": "object",
                             "additionalProperties": {
-                              "anyOf": [
-                                {
-                                  "type": "integer",
-                                  "format": "int64"
-                                },
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "boolean"
-                                },
-                                {
-                                  "type": "object"
-                                }
-                              ]
+                              "type": "object"
                             }
                           },
                           "state": {
@@ -5967,21 +5849,7 @@
                           "trigger_parameters": {
                             "type": "object",
                             "additionalProperties": {
-                              "anyOf": [
-                                {
-                                  "type": "integer",
-                                  "format": "int64"
-                                },
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "boolean"
-                                },
-                                {
-                                  "type": "object"
-                                }
-                              ]
+                              "type": "string"
                             }
                           },
                           "state": {
@@ -6248,21 +6116,7 @@
                     "trigger_parameters": {
                       "type": "object",
                       "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer",
-                            "format": "int64"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          },
-                          {
-                            "type": "object"
-                          }
-                        ]
+                        "type": "object"
                       }
                     },
                     "state": {
@@ -6472,14 +6326,12 @@
                             "properties": {
                               "per-hour": {
                                 "type": "integer",
-                                "format": "integer",
                                 "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
                               },
                               "hours-of-day": {
                                 "type": "array",
                                 "items": {
                                   "type": "integer",
-                                  "format": "integer",
                                   "description": "Hour in a day in UTC, value must be between 0 and 24"
                                 },
                                 "description": "Hours in a day in which the schedule triggers."
@@ -6531,17 +6383,7 @@
                           "parameters": {
                             "type": "object",
                             "additionalProperties": {
-                              "anyOf": [
-                                {
-                                  "type": "integer"
-                                },
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "boolean"
-                                }
-                              ]
+                              "type": "string"
                             },
                             "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
                             "example": {
@@ -6667,14 +6509,12 @@
                       "properties": {
                         "per-hour": {
                           "type": "integer",
-                          "format": "integer",
                           "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
                         },
                         "hours-of-day": {
                           "type": "array",
                           "items": {
                             "type": "integer",
-                            "format": "integer",
                             "description": "Hour in a day in UTC, value must be between 0 and 24"
                           },
                           "description": "Hours in a day in which the schedule triggers."
@@ -6722,17 +6562,7 @@
                     "parameters": {
                       "type": "object",
                       "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          }
-                        ]
+                        "type": "string"
                       },
                       "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
                       "example": {
@@ -6829,14 +6659,12 @@
                     "properties": {
                       "per-hour": {
                         "type": "integer",
-                        "format": "integer",
                         "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
                       },
                       "hours-of-day": {
                         "type": "array",
                         "items": {
                           "type": "integer",
-                          "format": "integer",
                           "description": "Hour in a day in UTC, value must be between 0 and 24"
                         },
                         "description": "Hours in a day in which the schedule triggers."
@@ -6871,17 +6699,7 @@
                   "parameters": {
                     "type": "object",
                     "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
+                      "type": "string"
                     },
                     "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
                     "example": {
@@ -7143,14 +6961,12 @@
                       "properties": {
                         "per-hour": {
                           "type": "integer",
-                          "format": "integer",
                           "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
                         },
                         "hours-of-day": {
                           "type": "array",
                           "items": {
                             "type": "integer",
-                            "format": "integer",
                             "description": "Hour in a day in UTC, value must be between 0 and 24"
                           },
                           "description": "Hours in a day in which the schedule triggers."
@@ -7198,17 +7014,7 @@
                     "parameters": {
                       "type": "object",
                       "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          }
-                        ]
+                        "type": "string"
                       },
                       "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
                       "example": {
@@ -7309,14 +7115,12 @@
                     "properties": {
                       "per-hour": {
                         "type": "integer",
-                        "format": "integer",
                         "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
                       },
                       "hours-of-day": {
                         "type": "array",
                         "items": {
                           "type": "integer",
-                          "format": "integer",
                           "description": "Hour in a day in UTC, value must be between 0 and 24"
                         },
                         "description": "Hours in a day in which the schedule triggers."
@@ -7350,17 +7154,7 @@
                   "parameters": {
                     "type": "object",
                     "additionalProperties": {
-                      "anyOf": [
-                        {
-                          "type": "integer"
-                        },
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
+                      "type": "string"
                     },
                     "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
                     "example": {
@@ -7453,14 +7247,12 @@
                       "properties": {
                         "per-hour": {
                           "type": "integer",
-                          "format": "integer",
                           "description": "Number of times a schedule triggers per hour, value must be between 1 and 60"
                         },
                         "hours-of-day": {
                           "type": "array",
                           "items": {
                             "type": "integer",
-                            "format": "integer",
                             "description": "Hour in a day in UTC, value must be between 0 and 24"
                           },
                           "description": "Hours in a day in which the schedule triggers."
@@ -7508,17 +7300,7 @@
                     "parameters": {
                       "type": "object",
                       "additionalProperties": {
-                        "anyOf": [
-                          {
-                            "type": "integer"
-                          },
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "boolean"
-                          }
-                        ]
+                        "type": "string"
                       },
                       "description": "Pipeline parameters represented as key-value pairs. Must contain branch or tag.",
                       "example": {
