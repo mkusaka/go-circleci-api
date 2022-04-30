@@ -1,0 +1,5 @@
+version: 3.7.0 # This doesn't seem to be useful
+input-file: swagger.json
+go:
+  output-folder: ./client/
+  namespace: client

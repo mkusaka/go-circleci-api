@@ -30,7 +30,15 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	//Run: func(cmd *cobra.Command, args []string) {
+	//	f, err := cmd.Flags().GetBool("toggle")
+	//	if err != nil {
+	//		log.Fatal(err)
+	//	}
+	//
+	//	fmt.Printf("toggle %+v\n", f)
+	//	fmt.Printf("cmd.Flags() %+v\n", cmd.Flags())
+	//},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

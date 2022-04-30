@@ -1,0 +1,27 @@
+diff --git a/swagger.json b/swagger.json
+index 08ddb09..014995a 100644
+--- a/swagger.json
++++ b/swagger.json
+@@ -19,9 +19,6 @@
+     },
+     {
+       "basic_auth": []
+-    },
+-    {
+-      "api_key_query": []
+     }
+   ],
+   "paths": {
+@@ -8196,12 +8193,6 @@
+         "description": "HTTP basic authentication. The username should be set as the circle-token value, and the password should be left blank. Note that project tokens are currently not supported on API v2.",
+         "type": "http",
+         "scheme": "basic"
+-      },
+-      "api_key_query": {
+-        "type": "apiKey",
+-        "name": "circle-token",
+-        "in": "query",
+-        "description": "DEPRECATED - we will remove this option in the future"
+       }
+     }
+   },
