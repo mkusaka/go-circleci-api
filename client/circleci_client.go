@@ -139,7 +139,7 @@ func (client *CircleciClient) approvePendingApprovalJobByIDHandleResponse(resp *
 // jobNumber - The number of the job.
 // projectSlug - Project slug in the form vcs-slug/org-name/repo-name. The / characters may be URL-escaped.
 // options - CircleciClientCancelJobOptions contains the optional parameters for the CircleciClient.CancelJob method.
-func (client *CircleciClient) CancelJob(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientCancelJobOptions) (CircleciClientCancelJobResponse, error) {
+func (client *CircleciClient) CancelJob(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientCancelJobOptions) (CircleciClientCancelJobResponse, error) {
 	req, err := client.cancelJobCreateRequest(ctx, jobNumber, projectSlug, options)
 	if err != nil {
 		return CircleciClientCancelJobResponse{}, err
@@ -155,9 +155,9 @@ func (client *CircleciClient) CancelJob(ctx context.Context, jobNumber interface
 }
 
 // cancelJobCreateRequest creates the CancelJob request.
-func (client *CircleciClient) cancelJobCreateRequest(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientCancelJobOptions) (*policy.Request, error) {
+func (client *CircleciClient) cancelJobCreateRequest(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientCancelJobOptions) (*policy.Request, error) {
 	urlPath := "/project/{project-slug}/job/{job-number}/cancel"
-	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(jobNumber))
+	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(strconv.FormatInt(int64(jobNumber), 10)))
 	urlPath = strings.ReplaceAll(urlPath, "{project-slug}", projectSlug)
 	req, err := runtime.NewRequest(ctx, http.MethodPost, runtime.JoinPaths(host, urlPath))
 	if err != nil {
@@ -971,7 +971,7 @@ func (client *CircleciClient) getFlakyTestsHandleResponse(resp *http.Response) (
 // projectSlug - Project slug in the form vcs-slug/org-name/repo-name. The / characters may be URL-escaped.
 // options - CircleciClientGetJobArtifactsOptions contains the optional parameters for the CircleciClient.GetJobArtifacts
 // method.
-func (client *CircleciClient) GetJobArtifacts(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientGetJobArtifactsOptions) (CircleciClientGetJobArtifactsResponse, error) {
+func (client *CircleciClient) GetJobArtifacts(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientGetJobArtifactsOptions) (CircleciClientGetJobArtifactsResponse, error) {
 	req, err := client.getJobArtifactsCreateRequest(ctx, jobNumber, projectSlug, options)
 	if err != nil {
 		return CircleciClientGetJobArtifactsResponse{}, err
@@ -987,9 +987,9 @@ func (client *CircleciClient) GetJobArtifacts(ctx context.Context, jobNumber int
 }
 
 // getJobArtifactsCreateRequest creates the GetJobArtifacts request.
-func (client *CircleciClient) getJobArtifactsCreateRequest(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientGetJobArtifactsOptions) (*policy.Request, error) {
+func (client *CircleciClient) getJobArtifactsCreateRequest(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientGetJobArtifactsOptions) (*policy.Request, error) {
 	urlPath := "/project/{project-slug}/{job-number}/artifacts"
-	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(jobNumber))
+	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(strconv.FormatInt(int64(jobNumber), 10)))
 	urlPath = strings.ReplaceAll(urlPath, "{project-slug}", projectSlug)
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(host, urlPath))
 	if err != nil {

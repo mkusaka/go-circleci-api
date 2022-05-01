@@ -1,0 +1,11 @@
+{
+  "name": "go-circleci-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mkusaka/go-circleci-api.git",
+  "author": "mkusaka <hinoshita1992@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "autorest": "^3.6.1"
+  }
+}

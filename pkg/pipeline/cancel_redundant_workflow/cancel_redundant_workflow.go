@@ -40,8 +40,8 @@ func Run(branch string) error {
 		targetBranch = branchName
 	}
 
-	c := client.NewAPIClient(client.NewConfiguration())
-	currentWorkflow, _, err := c.WorkflowApi.GetWorkflowById(ctx, workflowId).Execute()
+	c := client.NewCircleciClient(nil)
+	c.GetWorkflowByID()
 	if err != nil {
 		return fmt.Errorf("doCancelRedundantWorkflow: get workflow failed: %w", err)
 	}
