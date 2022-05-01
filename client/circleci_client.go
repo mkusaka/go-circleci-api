@@ -1014,7 +1014,7 @@ func (client *CircleciClient) getJobArtifactsHandleResponse(resp *http.Response)
 // jobNumber - The number of the job.
 // projectSlug - Project slug in the form vcs-slug/org-name/repo-name. The / characters may be URL-escaped.
 // options - CircleciClientGetJobDetailsOptions contains the optional parameters for the CircleciClient.GetJobDetails method.
-func (client *CircleciClient) GetJobDetails(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientGetJobDetailsOptions) (CircleciClientGetJobDetailsResponse, error) {
+func (client *CircleciClient) GetJobDetails(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientGetJobDetailsOptions) (CircleciClientGetJobDetailsResponse, error) {
 	req, err := client.getJobDetailsCreateRequest(ctx, jobNumber, projectSlug, options)
 	if err != nil {
 		return CircleciClientGetJobDetailsResponse{}, err
@@ -1030,9 +1030,9 @@ func (client *CircleciClient) GetJobDetails(ctx context.Context, jobNumber inter
 }
 
 // getJobDetailsCreateRequest creates the GetJobDetails request.
-func (client *CircleciClient) getJobDetailsCreateRequest(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientGetJobDetailsOptions) (*policy.Request, error) {
+func (client *CircleciClient) getJobDetailsCreateRequest(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientGetJobDetailsOptions) (*policy.Request, error) {
 	urlPath := "/project/{project-slug}/job/{job-number}"
-	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(jobNumber))
+	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(strconv.FormatInt(int64(jobNumber), 10)))
 	urlPath = strings.ReplaceAll(urlPath, "{project-slug}", projectSlug)
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(host, urlPath))
 	if err != nil {
@@ -1150,7 +1150,7 @@ func (client *CircleciClient) getOrgSummaryDataCreateRequest(ctx context.Context
 		reqQP.Set("reporting-window", string(*options.ReportingWindow))
 	}
 	if options != nil && options.ProjectNames != nil {
-		reqQP.Set("project-names", options.ProjectNames)
+		reqQP.Set("project-names", strings.Join(options.ProjectNames, ","))
 	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
@@ -1215,7 +1215,7 @@ func (client *CircleciClient) getPipelineByIDHandleResponse(resp *http.Response)
 // pipelineNumber - The number of the pipeline.
 // options - CircleciClientGetPipelineByNumberOptions contains the optional parameters for the CircleciClient.GetPipelineByNumber
 // method.
-func (client *CircleciClient) GetPipelineByNumber(ctx context.Context, projectSlug string, pipelineNumber interface{}, options *CircleciClientGetPipelineByNumberOptions) (CircleciClientGetPipelineByNumberResponse, error) {
+func (client *CircleciClient) GetPipelineByNumber(ctx context.Context, projectSlug string, pipelineNumber int32, options *CircleciClientGetPipelineByNumberOptions) (CircleciClientGetPipelineByNumberResponse, error) {
 	req, err := client.getPipelineByNumberCreateRequest(ctx, projectSlug, pipelineNumber, options)
 	if err != nil {
 		return CircleciClientGetPipelineByNumberResponse{}, err
@@ -1231,10 +1231,10 @@ func (client *CircleciClient) GetPipelineByNumber(ctx context.Context, projectSl
 }
 
 // getPipelineByNumberCreateRequest creates the GetPipelineByNumber request.
-func (client *CircleciClient) getPipelineByNumberCreateRequest(ctx context.Context, projectSlug string, pipelineNumber interface{}, options *CircleciClientGetPipelineByNumberOptions) (*policy.Request, error) {
+func (client *CircleciClient) getPipelineByNumberCreateRequest(ctx context.Context, projectSlug string, pipelineNumber int32, options *CircleciClientGetPipelineByNumberOptions) (*policy.Request, error) {
 	urlPath := "/project/{project-slug}/pipeline/{pipeline-number}"
 	urlPath = strings.ReplaceAll(urlPath, "{project-slug}", projectSlug)
-	urlPath = strings.ReplaceAll(urlPath, "{pipeline-number}", url.PathEscape(pipelineNumber))
+	urlPath = strings.ReplaceAll(urlPath, "{pipeline-number}", url.PathEscape(strconv.FormatInt(int64(pipelineNumber), 10)))
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(host, urlPath))
 	if err != nil {
 		return nil, err
@@ -1689,10 +1689,10 @@ func (client *CircleciClient) getProjectWorkflowsPageDataCreateRequest(ctx conte
 		reqQP.Set("reporting-window", string(*options.ReportingWindow))
 	}
 	if options != nil && options.Branches != nil {
-		reqQP.Set("branches", options.Branches)
+		reqQP.Set("branches", strings.Join(options.Branches, ","))
 	}
 	if options != nil && options.WorkflowNames != nil {
-		reqQP.Set("workflow-names", options.WorkflowNames)
+		reqQP.Set("workflow-names", strings.Join(options.WorkflowNames, ","))
 	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
@@ -1757,7 +1757,7 @@ func (client *CircleciClient) getScheduleByIDHandleResponse(resp *http.Response)
 // jobNumber - The number of the job.
 // projectSlug - Project slug in the form vcs-slug/org-name/repo-name. The / characters may be URL-escaped.
 // options - CircleciClientGetTestsOptions contains the optional parameters for the CircleciClient.GetTests method.
-func (client *CircleciClient) GetTests(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientGetTestsOptions) (CircleciClientGetTestsResponse, error) {
+func (client *CircleciClient) GetTests(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientGetTestsOptions) (CircleciClientGetTestsResponse, error) {
 	req, err := client.getTestsCreateRequest(ctx, jobNumber, projectSlug, options)
 	if err != nil {
 		return CircleciClientGetTestsResponse{}, err
@@ -1773,9 +1773,9 @@ func (client *CircleciClient) GetTests(ctx context.Context, jobNumber interface{
 }
 
 // getTestsCreateRequest creates the GetTests request.
-func (client *CircleciClient) getTestsCreateRequest(ctx context.Context, jobNumber interface{}, projectSlug string, options *CircleciClientGetTestsOptions) (*policy.Request, error) {
+func (client *CircleciClient) getTestsCreateRequest(ctx context.Context, jobNumber int32, projectSlug string, options *CircleciClientGetTestsOptions) (*policy.Request, error) {
 	urlPath := "/project/{project-slug}/{job-number}/tests"
-	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(jobNumber))
+	urlPath = strings.ReplaceAll(urlPath, "{job-number}", url.PathEscape(strconv.FormatInt(int64(jobNumber), 10)))
 	urlPath = strings.ReplaceAll(urlPath, "{project-slug}", projectSlug)
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(host, urlPath))
 	if err != nil {
@@ -1916,7 +1916,7 @@ func (client *CircleciClient) getWorkflowSummaryCreateRequest(ctx context.Contex
 		reqQP.Set("all-branches", strconv.FormatBool(*options.AllBranches))
 	}
 	if options != nil && options.Branches != nil {
-		reqQP.Set("branches", options.Branches)
+		reqQP.Set("branches", strings.Join(options.Branches, ","))
 	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")

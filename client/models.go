@@ -203,7 +203,7 @@ type CircleciClientGetJobTimeseriesOptions struct {
 // CircleciClientGetOrgSummaryDataOptions contains the optional parameters for the CircleciClient.GetOrgSummaryData method.
 type CircleciClientGetOrgSummaryDataOptions struct {
 	// List of project names.
-	ProjectNames interface{}
+	ProjectNames []string
 	// The time window used to calculate summary metrics.
 	ReportingWindow *Enum6
 }
@@ -296,11 +296,11 @@ type CircleciClientGetProjectWorkflowTestMetricsOptions struct {
 // method.
 type CircleciClientGetProjectWorkflowsPageDataOptions struct {
 	// The names of VCS branches to include in branch-level workflow metrics.
-	Branches interface{}
+	Branches []string
 	// The time window used to calculate summary metrics.
 	ReportingWindow *Enum3
 	// The names of workflows to include in workflow-level metrics.
-	WorkflowNames interface{}
+	WorkflowNames []string
 }
 
 // CircleciClientGetScheduleByIDOptions contains the optional parameters for the CircleciClient.GetScheduleByID method.
@@ -328,7 +328,7 @@ type CircleciClientGetWorkflowSummaryOptions struct {
 	// Whether to retrieve data for all branches combined. Use either this parameter OR the branch name parameter.
 	AllBranches *bool
 	// The names of VCS branches to include in branch-level workflow metrics.
-	Branches interface{}
+	Branches []string
 }
 
 // CircleciClientGetWorkflowTimeseriesOptions contains the optional parameters for the CircleciClient.GetWorkflowTimeseries

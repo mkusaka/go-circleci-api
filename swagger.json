@@ -954,7 +954,10 @@
             "name": "branches",
             "description": "The names of VCS branches to include in branch-level workflow metrics.",
             "schema": {
-              "type": "object"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "required": false,
             "example": "A single branch: ?branches=main or for multiple branches: ?branches=main&branches=feature&branches=dev"
@@ -964,7 +967,10 @@
             "name": "workflow-names",
             "description": "The names of workflows to include in workflow-level metrics.",
             "schema": {
-              "type": "object"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "required": false,
             "example": "A single workflow name: ?workflow-names=build-test-deploy or \n    for multiple workflow names: ?workflow-names=build&workflow-names=test-and-deploy."
@@ -1711,7 +1717,10 @@
             "name": "project-names",
             "description": "List of project names.",
             "schema": {
-              "type": "object"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "required": false,
             "example": "For a single project: ?project-names=some-project or for multiple projects: ?project-names=some-project1&project-names=some-project2"
@@ -3042,7 +3051,10 @@
             "name": "branches",
             "description": "The names of VCS branches to include in branch-level workflow metrics.",
             "schema": {
-              "type": "object"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "required": false,
             "example": "A single branch: ?branches=main or for multiple branches: ?branches=main&branches=feature&branches=dev"
@@ -5385,7 +5397,9 @@
             "in": "path",
             "name": "job-number",
             "description": "The number of the job.",
-            "schema": {},
+            "schema": {
+              "type": "integer"
+            },
             "required": true,
             "example": "123"
           },
@@ -5450,7 +5464,9 @@
             "in": "path",
             "name": "job-number",
             "description": "The number of the job.",
-            "schema": {},
+            "schema": {
+              "type": "integer"
+            },
             "required": true,
             "example": "123"
           },
@@ -6434,7 +6450,9 @@
             "in": "path",
             "name": "pipeline-number",
             "description": "The number of the pipeline.",
-            "schema": {},
+            "schema": {
+              "type": "integer"
+            },
             "required": true
           }
         ]
@@ -6978,7 +6996,9 @@
             "in": "path",
             "name": "job-number",
             "description": "The number of the job.",
-            "schema": {},
+            "schema": {
+              "type": "integer"
+            },
             "required": true,
             "example": "123"
           },
@@ -7098,7 +7118,9 @@
             "in": "path",
             "name": "job-number",
             "description": "The number of the job.",
-            "schema": {},
+            "schema": {
+              "type": "integer"
+            },
             "required": true,
             "example": "123"
           },
