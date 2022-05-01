@@ -30,8 +30,6 @@ func init() {
 	Cmd.AddCommand(ListPipelinesForProjectCmd)
 	Cmd.AddCommand(ListMyPipelinesCmd)
 	Cmd.AddCommand(GetPipelineByNumberCmd)
-	Cmd.AddCommand(CancelRedundantWorkflowCmd)
-
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

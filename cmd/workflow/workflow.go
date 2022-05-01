@@ -26,6 +26,7 @@ func init() {
 	Cmd.AddCommand(CancelWorkflowCmd)
 	Cmd.AddCommand(ListWorkflowJobsCmd)
 	Cmd.AddCommand(RerunWorkflowCmd)
+	Cmd.AddCommand(CancelRedundantWorkflowCmd)
 
 	// Here you will define your flags and configuration settings.
 

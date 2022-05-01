@@ -2,12 +2,12 @@
 Copyright © 2022 mkusaka
 
 */
-package pipeline
+package workflow
 
 import (
 	"fmt"
 
-	"github.com/mkusaka/go-circleci-api/pkg/pipeline/cancel_redundant_workflow"
+	"github.com/mkusaka/go-circleci-api/pkg/workflow/cancel_redundant"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +26,7 @@ to quickly create a Cobra application.`,
 		if err != nil {
 			return fmt.Errorf("error executte cancel_redundant_workflow: %w", err)
 		}
-		err = cancel_redundant_workflow.Run(branch)
+		err = cancel_redundant.RunE(branch)
 		if err != nil {
 			return fmt.Errorf("error executte cancel_redundant_workflow: %w", err)
 		}
